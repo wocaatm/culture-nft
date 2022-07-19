@@ -7,6 +7,8 @@
     <input v-model="methodName" type="text">
     <button class="px-4 py-2 font-bold rounded-md bg-slate-500 text-white" @click="read">get Contract</button>
     <p>结果：{{ result }}</p>
+
+    <button @click="airdrop">Set token base uri</button>
   </div>
 </template>
 
@@ -15,7 +17,7 @@ import web3Modal from '../config/web3Modal'
 import { ethers } from "ethers";
 import contractAbi from '../config/abi.json'
 
-const nftAddress = '0x27B4BC6343f247316Ba013280dB0BdE772BF822c'
+const nftAddress = '0x9989D94F7d0Ab5B1b1cBb20203F38c0d63C3699e'
 
 export default {
   name: 'cultureNft',
@@ -34,35 +36,34 @@ export default {
       result: '',
     }
   },
-  created() {
-    console.log(contractAbi)
-  },
   methods: {
     // connect wallet
     async collect() {
       try {
         this.web3Provider = await web3Modal.connect()
-        this.checkChainId()
         this.setEther()
+        this.checkChainId()
         this.getAccountInfo()
         this.setContract()
       } catch(err) {
         console.log(err)
       }
     },
-    checkChainId() {
-      if (this.web3Provider.chainId !== this.desiredChainId) {
+    async checkChainId() {
+      const { chainId } = await this.ethersProvider.getNetwork()
+      if (chainId !== this.desiredChainId) {
         // switch chainId
+        console.log('wrong networkd')
         // alert('worong network')
       }
     },
     async getAccountInfo() {
       // const accounts = await this.web3Provider.enable()
-      const accounts = await this.ethersProvider.send('eth_requestAccounts', [])
+      // const accounts = await this.ethersProvider.send('eth_requestAccounts', [])
+      const accounts = await this.ethersProvider.listAccounts()
       if (accounts && accounts.length) {
         this.account = accounts[0]
         const balance = await this.ethersProvider.getBalance(accounts[0])
-        console.log('balance', balance)
         this.balance = ethers.utils.formatEther(balance)
       }
     },
@@ -75,6 +76,10 @@ export default {
     },
     async mint() {
       console.log('mint')
+    },
+    async airdrop() {
+      const tx = await this.contractInstance.setBaseURL('https://chinese-culture.4everland.store')
+      console.log(tx)
     },
     async read() {
       if (this.methodName) {
