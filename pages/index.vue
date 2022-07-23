@@ -1,54 +1,130 @@
 <template>
   <div class="home-page">
-    <div class="flex justify-between items-center bg-black px-4 py-2 text-gray-400 font-bold fixed top-0 left-0 right-0 z-50">
+    <div class="flex justify-between items-center bg-black text-gray-200 font-bold fixed top-0 left-0 right-0 z-50 px-2 py-2 lg:px-8 lg:py-2">
       <!-- logo and page router -->
       <div class="left flex items-center">
-        <div class="border border-white border-2 w-10 h-10 rounded-full text-base"></div>
-        <div class="ml-8">首页</div>
-        <div class="mx-4">路线图</div>
-        <div class="">FAQ</div>
+        <div class="h-16 w-16">
+          <img src="../assets/images/icon.png" alt="" style="width: 100%; height: 100%">
+        </div>
+        <div class="hidden sm:flex">
+          <div class="ml-8">{{ $t('Home') }}</div>
+          <div class="mx-4">{{ $t('RoadMap') }}</div>
+          <div class="">{{ $t('Faq') }}</div>
+        </div>
       </div>
 
       <div class="right flex items-center">
-        <button v-if="!isLogin" class="px-4 py-1 font-bold rounded-md bg-slate-500 text-white" @click="collect">Collect Wallet</button>
+        <div v-if="!isLogin" class="wallet text-center h-10 p-1 w-48 bg-cover bg-center text-base cursor-pointer" @click="collect">Collect Wallet</div>
         <div v-else class="px-4 py-1 font-bold rounded-md bg-slate-500 text-white">
           {{ balance }}
           /
           {{ account }}
         </div>
-        <div class="mx-4 border border-white border-2 w-10 h-10 rounded-full text-base"></div>
-        <div class="border border-white border-2 w-10 h-10 rounded-full text-base"></div>
+        <div class="meduim hidden sm:flex items-center">
+          <img src="../assets/images/dc.png" alt="">
+          <img src="../assets/images/twitter.png" alt="">
+          <img src="../assets/images/os.png" alt="">
+        </div>
       </div>
     </div>
 
-    <div class="home-container h-screen relative">
-      <div class="bg-container blur-md absolute inset-0 bg-cover bg-center -z-10"></div>
-      <div class="absolute left-2/4 top-2/4 transform -translate-x-2/4 -translate-y-2/4 rounded-sm bg-white px-16 py-16 flex">
-        <div class="left w-64">
-          <img class="w-64 h-64" src="../assets/images/1.png" alt="">
-          <img class="w-64 h-64" src="../assets/images/2.png" alt="">
-        </div>
+    <div class="page-one relative pt-20">
+      <div class="mint-button absolute left-2/4 transform -translate-x-2/4 bottom-0 cursor-pointer hover:scale-110">
+        <img src="../assets/images/mint.png" alt="">
+      </div>
+      <img src="../assets/images/home-bg.png" alt="">
+    </div>
 
-        <div class="right ml-16 w-96">
-          <div class="text-center text-blue-400">
-            <span>Minted</span>
-            <span>{{ totalSupply }} / {{ CONST_PARAMS.COLLECTION_SIZE }}</span>
+    <div class="page-two relative pb-10">
+      <div class="wall">
+        <img src="../assets/images/wall.png" alt="">
+      </div>
+      <div class="tree absolute right-0 top-0 w-24 md:w-30 lg:w-40">
+        <img src="../assets/images/tree.png" alt="">
+      </div>
+
+      <h3 class="text-center text-white text-2xl my-2 md:my-6 md:text-3xl lg:my-16 lg:my-2 lg:text-5xl">{{ $t('productShow') }}</h3>
+
+      <div class="product-show flex px-0 md:px-2 lg:px-10 flex-wrap">
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/1.png" alt="">
           </div>
-          <template v-if="status === 2">
-            <input v-model.trim="mintCount" type="number" class="border border-gray-100 rounded-md w-full my-4 py-2 pl-2" placeholder="请输入mint的数量">
-            <div>
-              <button class="px-4 py-1 font-bold rounded-md bg-blue-400 text-white w-full text-center mt-2" @click="mint">Mint</button>
-            </div>
-          </template>
-          <template v-else-if="status === 1">
-            <button :disabled="!isWhiteList" class="px-4 py-1 font-bold rounded-md bg-blue-400 text-white w-full text-center mt-2" @click="wlMint">White List Mint</button>
-            <p v-if="!isWhiteList">您不在白名单中，无法mint</p>
-          </template>
-          <template v-else-if="status === 0">
-            <p>mint还未开始</p>
-          </template>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/2.png" alt="">
+          </div>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/3.png" alt="">
+          </div>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/4.png" alt="">
+          </div>
         </div>
       </div>
+
+      <div class="product-show flex px-0 md:px-2 lg:px-10 flex-wrap">
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/5.png" alt="">
+          </div>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/6.png" alt="">
+          </div>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/7.png" alt="">
+          </div>
+        </div>
+        <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
+          <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
+            <img class="" src="../assets/images/8.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-three text-white py-4 pb-12 md:py-12 lg:py-24">
+      <h3 class="text-center text-2xl md:text-3xl lg:text-5xl">FAQ</h3>
+
+      <div class="faq-container container mx-auto flex flex-wrap text-white flex-wrap py-0 pt-2 md:py-4 lg:py-8">
+        <div class="faq-item w-full px-2 mx-4 mt-2 md:mx-0 md:mt-4 md:w-1/2 md:px-4">
+          <div class="border border-2 rounded-md border-white px-3 py-2 md:py-4 md:px-8">
+            <div class="question text-lg tetxt-center">1. 我们的愿景？</div>
+            <div class="answer text-sm pl-4">通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容</div>
+          </div>
+        </div>
+        <div class="faq-item w-full px-2 mx-4 mt-2 md:mx-0 md:mt-4 md:w-1/2 md:px-4">
+          <div class="border border-2 rounded-md border-white px-3 py-2 md:py-4 md:px-8">
+            <div class="question text-lg tetxt-center">1. 我们的愿景？</div>
+            <div class="answer text-sm pl-4">通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容</div>
+          </div>
+        </div>
+        <div class="faq-item w-full px-2 mx-4 mt-2 md:mx-0 md:mt-4 md:w-1/2 md:px-4">
+          <div class="border border-2 rounded-md border-white px-3 py-2 md:py-4 md:px-8">
+            <div class="question text-lg tetxt-center">1. 我们的愿景？</div>
+            <div class="answer text-sm pl-4">通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容</div>
+          </div>
+        </div>
+        <div class="faq-item w-full px-2 mx-4 mt-2 md:mx-0 md:mt-4 md:w-1/2 md:px-4">
+          <div class="border border-2 rounded-md border-white px-3 py-2 md:py-4 md:px-8">
+            <div class="question text-lg tetxt-center">1. 我们的愿景？</div>
+            <div class="answer text-sm pl-4">通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容通过nft展示各种文化的内容</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer bg-black pl-1 py-5 text-sm md:text-base lg:pl-20 text-white md:pl-2">
+      Copyright © 2021 Culture Dao — All rights reserved.
     </div>
   </div>
 </template>
@@ -229,7 +305,33 @@ export default {
 </script>
 
 <style scoped>
-.bg-container {
-  background-image: url('../assets/images/home-bg.png');
+.wallet {
+  background-image: url('../assets/images/wallet.png');
+  background-size: 100% 100%;
+}
+.mint-button {
+  width: 16%;
+  bottom: 8%;
+}
+
+@media (min-width: 640px)
+{
+  .mint-button {
+    bottom: 10%;
+  }
+}
+
+.meduim img {
+  width: 40px;
+  height: 40px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.page-two {
+  background-color: #AA2B24;
+}
+.page-three {
+  background-image: url('../assets/images/faq-bg.png');
+  background-size: 100% 100%;
 }
 </style>

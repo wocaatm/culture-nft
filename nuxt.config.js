@@ -8,12 +8,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'culture-nft',
-    htmlAttrs: {
-      lang: 'en'
-    },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1, user-scalable=0' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
@@ -38,7 +35,24 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxt/postcss8',
+    '@nuxtjs/i18n',
   ],
+
+  i18n: {
+    locales: ['en', 'zh'],
+    defaultLocale: 'zh',
+    vueI18n: {
+      fallbackLocale: 'zh',
+      messages: {
+        en: {
+          welcome: 'Welcome'
+        },
+        zh: {
+          welcome: '欢迎'
+        }
+      }
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
