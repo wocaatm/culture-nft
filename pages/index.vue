@@ -20,7 +20,9 @@
         </div>
         <div class="hidden md:flex items-center">
           <img class="meduim_icon cursor_pointer_scale" src="../assets/images/dc.png" alt="">
-          <img class="meduim_icon cursor_pointer_scale" src="../assets/images/twitter.png" alt="">
+          <a href="https://twitter.com/COperaOfficial" target="_blank">
+            <img class="meduim_icon cursor_pointer_scale" src="../assets/images/twitter.png" alt="">
+          </a>
           <img class="meduim_icon cursor_pointer_scale" src="../assets/images/os.png" alt="">
         </div>
         <nuxt-link v-if="language === 'en'" class="meduim_icon border border-2 border-white flex items-center justify-center rounded-full" :to="localePath('index', 'en')">EN</nuxt-link>
@@ -29,14 +31,14 @@
     </div>
 
     <div id="home" class="page-one relative pt-20">
-      <div class="mint-button absolute left-2/4 transform -translate-x-2/4 bottom-0 cursor_pointer_scale" @click="mint">
+      <div v-if="showMint" class="mint-button absolute left-2/4 transform -translate-x-2/4 bottom-0 cursor_pointer_scale" @click="mint">
         <img src="../assets/images/mint.png" alt="">
       </div>
       <div class="absolute right-1/4 bottom-0 transform -translate-y-60 translate-x-10 hidden lg:block md:w-48 lg:w-96 cursor_pointer_scale">
         <div class="white-list-content absolute-center text-2xl text-center" style="color: #E10A45">
           <p class="font-bold text-xl">{{ $t(mintPraph) }}</p>
           <p v-if="mintContent" class="text-base">{{ $t(mintContent) }}</p>
-          <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ CONST_PARAMS.COLLECTION_SIZE }}</p>
+          <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ allSupply }}</p>
         </div>
         <img src="../assets/images/whiteList.png" alt="">
       </div>
@@ -44,7 +46,7 @@
       <div class="fixed p-3 rounded-3xl left-1/2 -translate-x-1/2 bottom-10 z-50 shadow-2xl text-white lg:hidden" style="background-color: #E10A45">
         <p class="font-bold text-xl">{{ $t(mintPraph) }}</p>
         <p v-if="mintContent" class="mt-2 text-base">{{ $t(mintContent) }}</p>
-        <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ CONST_PARAMS.COLLECTION_SIZE }}</p>
+        <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ allSupply }}</p>
       </div>
 
       <img src="../assets/images/home-bg.png" alt="">
@@ -129,6 +131,9 @@
     <div class="error-network fixed top-32 left-1/2 -translate-x-1/2 p-3 rounded-2xl shadow-2xl bg-gray-900 text-white" v-if="wrongNetWork">
       {{ $t('wrongNetWork') }}
     </div>
+    <div class="tx fixed top-32 left-1/2 -translate-x-1/2 p-3 rounded-2xl shadow-2xl bg-gray-900 text-white" v-if="tx">
+      {{ `hash:${tx}` }}
+    </div>
   </div>
 </template>
 
@@ -174,7 +179,8 @@ export default {
       status: 0,
       totalSupply: 0,
       FAQS,
-      language: 'en'
+      language: 'en',
+      tx: null,
     }
   },
   created() {
@@ -218,6 +224,12 @@ export default {
         content = this.isWhiteList ? 'InWhiteList' : 'NotInWhiteList'
       }
       return content
+    },
+    showMint() {
+      return this.totalSupply < CONST_PARAMS.COLLECTION_SIZE
+    },
+    allSupply() {
+      return CONST_PARAMS.COLLECTION_SIZE + CONST_PARAMS.RESERVE_SIZE
     },
   },
   methods: {
@@ -279,10 +291,11 @@ export default {
         errorMsg = 'NeedLogin'
       } else if (this.status === 0) {
         errorMsg = 'NotStart'
-      } else if (this.status === 1) {
-        if (!this.isWhiteList) errorMsg = 'NotInWhiteList'
-      } else if (this.alreadyMint >= CONST_PARAMS.TOKENS_PER_PERSON_LIMIT) {
-        errorMsg = 'TOKENS_PER_PERSON_LIMIT'
+      } else {
+        if (this.status === 1 && !this.isWhiteList) errorMsg = 'NotInWhiteList'
+        if (this.alreadyMint >= CONST_PARAMS.TOKENS_PER_PERSON_LIMIT) {
+          errorMsg = 'TOKENS_PER_PERSON_LIMIT'
+        }
       }
 
       if (errorMsg) {
@@ -292,7 +305,12 @@ export default {
       try {
         const hexProof = getHexProof(this.account)
         const result = await this.contractInstance.redeem(hexProof)
-        console.log(result)
+        if (result && result.hash) {
+          this.tx = result.hash
+          setTimeout(() => {
+            this.tx = null
+          }, 10000)
+        }
       } catch(err) {
         console.log(err)
       }
@@ -309,14 +327,14 @@ export default {
       this.alreadyMint = alreadyMint.toNumber()
       this.totalSupply = totalSupply.toNumber()
     },
-    async switchNetWork() {
-      try {
-        console.log(this.ethersProvider)
-        this.ethersProvider.send('wallet_switchEthereumChain', [{ chainId: ethers.utils.hexValue(this.desiredChainId) }])
-      } catch(err) {
-        console.log('error', err)
-      }
-    },
+    // async switchNetWork() {
+    //   try {
+    //     console.log(this.ethersProvider)
+    //     this.ethersProvider.send('wallet_switchEthereumChain', [{ chainId: ethers.utils.hexValue(this.desiredChainId) }])
+    //   } catch(err) {
+    //     console.log('error', err)
+    //   }
+    // },
     listenProvider() {
       this.web3Provider.on('chainChanged', () => {
         this.wrongNetWork = false
