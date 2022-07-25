@@ -4,7 +4,7 @@
       <!-- logo and page router -->
       <div class="left flex items-center">
         <div class="h-16 cursor-pointer">
-          <img src="../assets/images/icon.png" alt="" style="width: 100%; height: 100%">
+          <img src="https://copera-static.4everland.store/images/icon.png" alt="" style="width: 100%; height: 100%">
         </div>
         <div class="hidden md:flex">
           <a href="#home" class="ml-8 hover:scale-110 cursor_pointer_scale">{{ $t('HOME') }}</a>
@@ -19,11 +19,11 @@
           {{ `${balance.toFixed(2)}${balanceUnit}` }} / {{ accountString }}
         </div>
         <div class="hidden md:flex items-center">
-          <img class="meduim_icon cursor_pointer_scale" src="../assets/images/dc.png" alt="">
+          <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/dc.png" alt="">
           <a href="https://twitter.com/COperaOfficial" target="_blank">
-            <img class="meduim_icon cursor_pointer_scale" src="../assets/images/twitter.png" alt="">
+            <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/twitter.png" alt="">
           </a>
-          <img class="meduim_icon cursor_pointer_scale" src="../assets/images/os.png" alt="">
+          <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/os.png" alt="">
         </div>
         <nuxt-link v-if="language === 'en'" class="meduim_icon border border-2 border-white flex items-center justify-center rounded-full" :to="localePath('index', 'en')">EN</nuxt-link>
         <nuxt-link v-else class="meduim_icon border border-2 border-white flex items-center justify-center rounded-full" :to="localePath('index', 'zh')">ZH</nuxt-link>
@@ -32,7 +32,7 @@
 
     <div id="home" class="page-one relative pt-20">
       <div v-if="showMint" class="mint-button absolute left-2/4 transform -translate-x-2/4 bottom-0 cursor_pointer_scale" @click="mint">
-        <img src="../assets/images/mint.png" alt="">
+        <img src="https://copera-static.4everland.store/images/mint.png" alt="">
       </div>
       <div class="absolute right-1/4 bottom-0 transform -translate-y-60 translate-x-10 hidden lg:block md:w-48 lg:w-96 cursor_pointer_scale">
         <div class="white-list-content absolute-center text-2xl text-center" style="color: #E10A45">
@@ -40,7 +40,7 @@
           <p v-if="mintContent" class="text-base">{{ $t(mintContent) }}</p>
           <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ allSupply }}</p>
         </div>
-        <img src="../assets/images/whiteList.png" alt="">
+        <img src="https://copera-static.4everland.store/images/whiteList.png" alt="">
       </div>
       <!-- mobile phone mint info -->
       <div class="fixed p-3 rounded-3xl left-1/2 -translate-x-1/2 bottom-10 z-50 shadow-2xl text-white lg:hidden" style="background-color: #E10A45">
@@ -49,15 +49,15 @@
         <p v-if="status !== 0" class="text-xl font-bold mt-2">{{ $t('minted') }} {{ totalSupply }} / {{ allSupply }}</p>
       </div>
 
-      <img src="../assets/images/home-bg.png" alt="">
+      <img src="https://copera-static.4everland.store/images/home-bg.png" alt="">
     </div>
 
     <div id="product" class="page-two relative pb-10">
       <div class="wall">
-        <img src="../assets/images/wall.png" alt="">
+        <img src="https://copera-static.4everland.store/images/wall.png" alt="">
       </div>
       <div class="tree absolute right-0 top-0 w-24 md:w-30 lg:w-40">
-        <img src="../assets/images/tree.png" alt="">
+        <img src="https://copera-static.4everland.store/images/tree.png" alt="">
       </div>
 
       <h3 class="text-center text-white text-2xl my-2 md:my-6 md:text-3xl lg:my-16 lg:my-2 lg:text-5xl">{{ $t('ProductShow') }}</h3>
@@ -65,42 +65,42 @@
       <div class="product-show flex px-0 md:px-2 lg:px-10 flex-wrap">
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/1.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/1.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/2.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/2.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/3.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/3.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/4.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/4.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/5.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/5.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/6.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/6.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/7.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/7.png" alt="">
           </div>
         </div>
         <div class="w-1/2 p-2 md:w-1/4 lg:p-4">
           <div class="shadow-2xl hover:scale-110 rounded-3xl overflow-hidden">
-            <img class="" src="../assets/images/8.png" alt="">
+            <img class="" src="https://copera-static.4everland.store/images/8.png" alt="">
           </div>
         </div>
       </div>
@@ -122,9 +122,9 @@
     <div class="bg-gray-900 px-2 py-5 text-sm md:text-base lg:pl-20 text-white md:pl-2 flex justify-between items-center">
       <span>Copyright © Culture Dao</span>
       <div class="flex md:hidden items-center">
-        <img class="meduim_icon cursor_pointer_scale" src="../assets/images/dc.png" alt="">
-        <img class="meduim_icon cursor_pointer_scale" src="../assets/images/twitter.png" alt="">
-        <img class="meduim_icon cursor_pointer_scale" src="../assets/images/os.png" alt="">
+        <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/dc.png" alt="">
+        <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/twitter.png" alt="">
+        <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/os.png" alt="">
       </div>
     </div>
 
@@ -358,7 +358,7 @@ export default {
 
 <style scoped>
 .wallet {
-  background-image: url('../assets/images/wallet.png');
+  background-image: url('https://copera-static.4everland.store/images/wallet.png');
   background-size: 100% 100%;
 }
 .mint-button {
@@ -388,7 +388,7 @@ export default {
   background-color: #AA2B24;
 }
 .page-three {
-  background-image: url('../assets/images/faq-bg.png');
+  background-image: url('https://copera-static.4everland.store/images/faq-bg.png');
   background-size: 100% 100%;
 }
 </style>
