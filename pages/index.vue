@@ -19,7 +19,9 @@
           {{ `${balance.toFixed(2)}${balanceUnit}` }} / {{ accountString }}
         </div>
         <div class="hidden md:flex items-center">
-          <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/dc.png" alt="">
+          <a href="https://discord.gg/PAwJBrUqR3" target="_blank">
+            <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/dc.png" alt="">
+          </a>
           <a href="https://twitter.com/COperaOfficial" target="_blank">
             <img class="meduim_icon cursor_pointer_scale" src="https://copera-static.4everland.store/images/twitter.png" alt="">
           </a>
