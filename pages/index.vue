@@ -136,6 +136,7 @@
     <div class="tx fixed top-32 left-1/2 -translate-x-1/2 p-3 rounded-2xl shadow-2xl bg-gray-900 text-white" v-if="tx">
       {{ `hash:${tx}` }}
     </div>
+    
   </div>
 </template>
 
@@ -171,7 +172,8 @@ export default {
       contractInstance: null,
       account: '',
       balance: 0,
-      desiredChainId: 4,
+      // eth mainnet
+      desiredChainId: 1,
       isWhiteList: false,
       isLogin: false,
       wrongNetWork: false,
